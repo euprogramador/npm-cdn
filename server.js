@@ -34,7 +34,7 @@ function serveFile(req, res, next) {
 
 function redirectToVersionedPackage(req, res, next) {
   console.log("redirectToVersionedPackage", req.params[0])
-  require("superagent").get("http://registry.npmjs.org/" + req.params[0], function(rez){
+  require("superagent").get(process.env.NPM_HOST + req.params[0], function(rez){
     if (!rez.ok) {
       return res.send(404, {error: "package not found: " + req.params[0]})
     }
